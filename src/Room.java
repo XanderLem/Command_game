@@ -10,16 +10,17 @@ public class Room {
     private final String fileName;
     private final int numRows, numCols;
     public static final char COMMENT = '#';
-    private static final String Empty = ".";
+    private static final String EMPTY= ".";
     private static final String Wall = "=";
     private static final String PLAYER = "P";
     public Object parent;
-    private player p;
+    private player P;
 
     public Room(String filename, Object Parent, player p) throws IOException {
         this.fileName = filename;
         //this.pos = Pos;
         this.parent = Parent;
+        this.P = p;
         File f = new File(fileName);
         BufferedReader br = new BufferedReader(new FileReader(f));
         String firstLine;
@@ -74,9 +75,10 @@ public class Room {
                             obj = new Room(token, this,p);
                         }
                         else if(token.equals(PLAYER)){
-                            p.Change_Coords(new Coordinates(i,j));
-                            p.ChangeRoom(this);
-                            obj = p;
+                            P.Change_Coords(new Coordinates(i,j));
+                            P.ChangeRoom(this);
+                            obj = P;
+                            System.out.println("FOUND PLAYER");
                         }
                         else{
                            obj = token;
@@ -99,13 +101,34 @@ public class Room {
         return fileName;
     }
 
-    public Object GetAtPos(Coordinates pos){
-        return map[pos.row()][pos.column()];
+    public Object GetAtPos(Coordinates pos){return map[pos.row()][pos.column()];}
+
+    public Object GetParent(){return parent;}
+
+    public void clearCell(Coordinates pos){map[pos.row()][pos.column()] = EMPTY;}
+
+    public boolean isEmpty(Coordinates pos){return map[pos.row()][pos.column()].equals(EMPTY);}
+
+    public void PlaceOBJ(Object obj,Coordinates pos){
+        map[pos.row()][pos.column()] = obj;
     }
 
-    public Object GetParent(){
-        return parent;
+    public boolean CanMove(Coordinates pos){
+        if((pos.row()>=0 && pos.row()<=numRows)&&(pos.column()>=0 && pos.column()<= numCols)){
+            return isEmpty(pos);
+        }
+        return false;
+
     }
+
+    public void MoveP(Coordinates pos){
+        Coordinates old = P.getPos();
+        clearCell(old);
+        PlaceOBJ(P,pos);
+        P.Change_Coords(pos);
+    }
+
+
 
     public void PrintRoom(){
         System.out.print( "    " );

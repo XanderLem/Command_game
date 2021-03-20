@@ -20,6 +20,7 @@ public class player {
         this.name = br.readLine();
         this.health = Integer.parseInt(br.readLine());
         this.score = Integer.parseInt(br.readLine());
+        br.close();
     }
 
 
