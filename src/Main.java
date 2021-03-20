@@ -8,8 +8,7 @@ public class Main
             throws IOException // when config file can't be read
     {
 
-        Room r = new Room(args[0], new Coordinates(0,0), null);
-        r.PrintRoom();
+        Manager m = new Manager();
     }
 
 

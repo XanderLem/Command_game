@@ -10,12 +10,15 @@ public class Room {
     private final String fileName;
     private final int numRows, numCols;
     public static final char COMMENT = '#';
-    protected Coordinates pos;
+    private static final String Empty = ".";
+    private static final String Wall = "=";
+    private static final String PLAYER = "P";
     public Object parent;
+    private player p;
 
-    public Room(String filename, Coordinates Pos, Object Parent) throws IOException {
+    public Room(String filename, Object Parent, player p) throws IOException {
         this.fileName = filename;
-        this.pos = Pos;
+        //this.pos = Pos;
         this.parent = Parent;
         File f = new File(fileName);
         BufferedReader br = new BufferedReader(new FileReader(f));
@@ -59,17 +62,24 @@ public class Room {
 
                  */
                 String line = firstLine;
+                String token;
                 for (int i = 0; i<numRows;i++ ){
                     if(line==null){break;}
                     if ( line.length() == 0 || line.charAt( 0 ) == COMMENT ) continue;
                     String[] pieces = line.split( "\\s+" );
                     for(int j = 0; j< pieces.length;j++){
-                     Object obj;
-                        if(pieces[j].contains(".txt")){
-                            obj = new Room(pieces[j],new Coordinates(i,j), this);
+                        Object obj;
+                        token = pieces[j];
+                        if(token.contains(".txt")){
+                            obj = new Room(token, this,p);
+                        }
+                        else if(token.equals(PLAYER)){
+                            p.Change_Coords(new Coordinates(i,j));
+                            p.ChangeRoom(this);
+                            obj = p;
                         }
                         else{
-                           obj = pieces[j];
+                           obj = token;
                         }
                         if(obj==null){break;}
                         map[i][j] = obj;
@@ -80,7 +90,7 @@ public class Room {
 
             }
 
-
+        br.close();
     }
 
 
