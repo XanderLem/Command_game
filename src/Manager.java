@@ -23,8 +23,29 @@ public class Manager {
         }
 
         public ActionResult ExecuteAction(String[] l){
-            if(l[0].equals("u")){
+            if(l[0].equals("w")){
                 Coordinates c = new Coordinates(p.getPos().row()-1 ,p.getPos().column() );
+                if( r.CanMove(c)){
+                    r.MoveP(c);
+                }
+                return ActionResult.OK;
+            }
+            else if(l[0].equals("s")){
+                Coordinates c = new Coordinates(p.getPos().row()+1 ,p.getPos().column() );
+                if( r.CanMove(c)){
+                    r.MoveP(c);
+                }
+                return ActionResult.OK;
+            }
+            else if(l[0].equals("a")){
+                Coordinates c = new Coordinates(p.getPos().row() ,p.getPos().column()-1 );
+                if( r.CanMove(c)){
+                    r.MoveP(c);
+                }
+                return ActionResult.OK;
+            }
+            else if(l[0].equals("d")){
+                Coordinates c = new Coordinates(p.getPos().row() ,p.getPos().column()+1 );
                 if( r.CanMove(c)){
                     r.MoveP(c);
                 }
