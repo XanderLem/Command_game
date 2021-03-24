@@ -33,10 +33,6 @@ public class player {
         this.pos = coor;
     }
 
-    public void Update_coords(Coordinates coor){
-        this.pos.plus(coor);
-    }
-
     public Coordinates getPos() {
         return pos;
     }
@@ -83,7 +79,6 @@ public class player {
         bw.newLine();
         bw.close();
         currentRoom.save();
-
     }
 
     public void printStats(){

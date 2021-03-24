@@ -11,7 +11,6 @@ public class Main
     public static void main(String[] args)
             throws IOException // when config file can't be read
     {
-
         Manager m = new Manager();
         playGame(m);
     }
@@ -37,9 +36,6 @@ public class Main
                         parts[ 0 ].equalsIgnoreCase( END_GAME ) ) {
                     break;
                 }
-
-
-
 
 
             ActionResult result = manager.ExecuteAction(parts);

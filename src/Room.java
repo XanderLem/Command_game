@@ -102,17 +102,16 @@ public class Room {
     public void clearCell(Coordinates pos){map[pos.row()][pos.column()] = EMPTY;}
 
     public boolean isEmpty(Coordinates pos){
-        if (map[pos.row()][pos.column()].equals(EMPTY)){
-            return true;
-        }
-        else if(map[pos.row()][pos.column()].equals(TOKEN)){
+        return (map[pos.row()][pos.column()].equals(EMPTY));
+
+    }
+
+    public boolean collided(Coordinates pos){
+        if(map[pos.row()][pos.column()].toString().equals(TOKEN)) {
             P.addToScore(1);
             return true;
         }
-        else{
-            return false;
-        }
-
+        return false;
     }
 
 
@@ -120,19 +119,27 @@ public class Room {
         map[pos.row()][pos.column()] = obj;
     }
 
-    public boolean CanMove(Coordinates pos){
-        if((pos.row()>=0 && pos.row()<=numRows)&&(pos.column()>=0 && pos.column()<= numCols)){
-            return isEmpty(pos);
+    public void PlaceP(Coordinates pos){
+        map[pos.row()][pos.column()] = P;
+    }
+
+    public boolean PCanMove(Coordinates pos){
+        Coordinates c = P.getPos().plus(pos);
+        if((c.row()>=0 && c.row()<=numRows)&&(c.column()>=0 && c.column()<= numCols)){
+            if(!isEmpty(c)){
+                return collided(c);
+            }
+            return true;
         }
         return false;
 
     }
 
     public void MoveP(Coordinates pos){
-        Coordinates old = P.getPos();
-        clearCell(old);
-        PlaceOBJ(P,pos);
-        P.Change_Coords(pos);
+        Coordinates c = P.getPos().plus(pos);
+        clearCell(P.getPos());
+        PlaceP(c);
+        P.Change_Coords(c);
     }
 
     public void save() throws IOException {

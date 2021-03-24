@@ -15,7 +15,6 @@ public class Manager {
             this.p = new player(this);
             this.r = new Room(p.GetRoomName(), this, p);
 
-
         }
 
         public void showRoom(){
@@ -26,29 +25,29 @@ public class Manager {
         public ActionResult ExecuteAction(String[] l) throws IOException {
             switch (l[0]) {
                 case "w" -> {
-                    Coordinates c = p.getPos().plus(new Coordinates( - 1,0)) ;
-                    if (r.CanMove(c)) {
+                    Coordinates c = new Coordinates( - 1,0) ;
+                    if (r.PCanMove(c)) {
                         r.MoveP(c);
                     }
                     return ActionResult.OK;
                 }
                 case "s" -> {
-                    Coordinates c = p.getPos().plus(new Coordinates(1,0));
-                    if (r.CanMove(c)) {
+                    Coordinates c = new Coordinates(1,0);
+                    if (r.PCanMove(c)) {
                         r.MoveP(c);
                     }
                     return ActionResult.OK;
                 }
                 case "a" -> {
-                    Coordinates c = p.getPos().plus(new Coordinates(0, -1));
-                    if (r.CanMove(c)) {
+                    Coordinates c = new Coordinates(0, -1);
+                    if (r.PCanMove(c)) {
                         r.MoveP(c);
                     }
                     return ActionResult.OK;
                 }
                 case "d" -> {
-                    Coordinates c = p.getPos().plus(new Coordinates(0, 1));
-                    if (r.CanMove(c)) {
+                    Coordinates c = new Coordinates(0, 1);
+                    if (r.PCanMove(c)) {
                         r.MoveP(c);
                     }
                     return ActionResult.OK;
