@@ -53,7 +53,7 @@ public class Manager {
                     return ActionResult.OK;
                 }
                 case "save"->{
-                    p.Save();
+                    p.save();
                 }
                 case"score"->{
                     p.addToScore(Integer.parseInt(l[1]));

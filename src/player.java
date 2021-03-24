@@ -3,6 +3,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class player {
     protected Coordinates pos;
@@ -69,7 +71,7 @@ public class player {
         return Player_token;
     }
 
-    public void Save() throws IOException {
+    public void save() throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
         bw.write(currentRoomName);
         bw.newLine();
@@ -78,7 +80,9 @@ public class player {
         bw.write(String.valueOf(health));
         bw.newLine();
         bw.write(String.valueOf(score));
+        bw.newLine();
         bw.close();
+        currentRoom.save();
 
     }
 

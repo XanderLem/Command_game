@@ -1,9 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
 public class Room {
 
     private Object[][] map;
@@ -124,21 +121,33 @@ public class Room {
         P.Change_Coords(pos);
     }
 
+    public void save() throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+        bw.write(numCols + " " + numCols);
+        bw.newLine();
+        for (Object[] objects : map) {
+            for (Object s : objects) {
+                bw.write(s.toString() + " ");
+            }
+            bw.newLine();
 
-
-    public void PrintRoom(){
-        System.out.print( "    " );
-        for ( int c = 0; c < map[0].length; ++c ) {
-            System.out.printf( "%2d ", c );
         }
-        System.out.println();
-        for(int i=0; i<map.length;i++){
-            System.out.printf( "%2d  ", i );
-            for(Object s:map[i]){
-                System.out.print(" "+ s.toString() + " ");
+        bw.close();
+    }
+
+        public void PrintRoom () {
+            System.out.print("    ");
+            for (int c = 0; c < map[0].length; ++c) {
+                System.out.printf("%2d ", c);
             }
             System.out.println();
+            for (int i = 0; i < map.length; i++) {
+                System.out.printf("%2d  ", i);
+                for (Object s : map[i]) {
+                    System.out.print(" " + s.toString() + " ");
+                }
+                System.out.println();
+            }
         }
     }
 
-}
