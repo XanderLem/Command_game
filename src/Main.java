@@ -17,7 +17,7 @@ public class Main
     }
 
 
-    private static void playGame( Manager manager ) {
+    private static void playGame( Manager manager ) throws IOException {
         Scanner console = new Scanner( System.in ); // User's move commands
 
         manager.showRoom();

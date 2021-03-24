@@ -22,34 +22,42 @@ public class Manager {
             r.PrintRoom();
         }
 
-        public ActionResult ExecuteAction(String[] l){
-            if(l[0].equals("w")){
-                Coordinates c = new Coordinates(p.getPos().row()-1 ,p.getPos().column() );
-                if( r.CanMove(c)){
-                    r.MoveP(c);
+        public ActionResult ExecuteAction(String[] l) throws IOException {
+            switch (l[0]) {
+                case "w" -> {
+                    Coordinates c = p.getPos().plus(new Coordinates( - 1,0)) ;
+                    if (r.CanMove(c)) {
+                        r.MoveP(c);
+                    }
+                    return ActionResult.OK;
                 }
-                return ActionResult.OK;
-            }
-            else if(l[0].equals("s")){
-                Coordinates c = new Coordinates(p.getPos().row()+1 ,p.getPos().column() );
-                if( r.CanMove(c)){
-                    r.MoveP(c);
+                case "s" -> {
+                    Coordinates c = p.getPos().plus(new Coordinates(1,0));
+                    if (r.CanMove(c)) {
+                        r.MoveP(c);
+                    }
+                    return ActionResult.OK;
                 }
-                return ActionResult.OK;
-            }
-            else if(l[0].equals("a")){
-                Coordinates c = new Coordinates(p.getPos().row() ,p.getPos().column()-1 );
-                if( r.CanMove(c)){
-                    r.MoveP(c);
+                case "a" -> {
+                    Coordinates c = p.getPos().plus(new Coordinates(0, -1));
+                    if (r.CanMove(c)) {
+                        r.MoveP(c);
+                    }
+                    return ActionResult.OK;
                 }
-                return ActionResult.OK;
-            }
-            else if(l[0].equals("d")){
-                Coordinates c = new Coordinates(p.getPos().row() ,p.getPos().column()+1 );
-                if( r.CanMove(c)){
-                    r.MoveP(c);
+                case "d" -> {
+                    Coordinates c = p.getPos().plus(new Coordinates(0, 1));
+                    if (r.CanMove(c)) {
+                        r.MoveP(c);
+                    }
+                    return ActionResult.OK;
                 }
-                return ActionResult.OK;
+                case "save"->{
+                    p.Save();
+                }
+                case"score"->{
+                    p.addToScore(Integer.parseInt(l[1]));
+                }
             }
             return ActionResult.OK;
         }

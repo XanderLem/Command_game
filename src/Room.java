@@ -18,7 +18,6 @@ public class Room {
 
     public Room(String filename, Object Parent, player p) throws IOException {
         this.fileName = filename;
-        //this.pos = Pos;
         this.parent = Parent;
         this.P = p;
         File f = new File(fileName);
@@ -78,11 +77,8 @@ public class Room {
                             P.Change_Coords(new Coordinates(i,j));
                             P.ChangeRoom(this);
                             obj = P;
-                            System.out.println("FOUND PLAYER");
                         }
-                        else{
-                           obj = token;
-                        }
+                        else{obj = token;}
                         if(obj==null){break;}
                         map[i][j] = obj;
                     }

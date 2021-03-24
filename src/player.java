@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class player {
     protected Coordinates pos;
@@ -55,12 +57,29 @@ public class player {
         health+=change;
     }
 
+    public void addToScore(int value){
+        score+=value;
+    }
+
     public String GetName(){
         return name;
     }
 
     public String toString(){
         return Player_token;
+    }
+
+    public void Save() throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+        bw.write(currentRoomName);
+        bw.newLine();
+        bw.write(name);
+        bw.newLine();
+        bw.write(String.valueOf(health));
+        bw.newLine();
+        bw.write(String.valueOf(score));
+        bw.close();
+
     }
 
 
