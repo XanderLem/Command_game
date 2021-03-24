@@ -10,6 +10,7 @@ public class Room {
     private static final String EMPTY= ".";
     private static final String Wall = "=";
     private static final String PLAYER = "P";
+    private static final String TOKEN = "$";
     public Object parent;
     private player P;
 
@@ -100,7 +101,20 @@ public class Room {
 
     public void clearCell(Coordinates pos){map[pos.row()][pos.column()] = EMPTY;}
 
-    public boolean isEmpty(Coordinates pos){return map[pos.row()][pos.column()].equals(EMPTY);}
+    public boolean isEmpty(Coordinates pos){
+        if (map[pos.row()][pos.column()].equals(EMPTY)){
+            return true;
+        }
+        else if(map[pos.row()][pos.column()].equals(TOKEN)){
+            P.addToScore(1);
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
 
     public void PlaceOBJ(Object obj,Coordinates pos){
         map[pos.row()][pos.column()] = obj;
