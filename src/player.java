@@ -86,5 +86,13 @@ public class player {
 
     }
 
+    public void printStats(){
+        System.out.println();
+        System.out.println("Room: "+ currentRoomName);
+        System.out.println("Name: "+ name);
+        System.out.println("Health: "+ health);
+        System.out.println("Score: "+ score);
+    }
+
 
 }

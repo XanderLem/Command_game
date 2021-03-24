@@ -1,0 +1,10 @@
+8 8
+= = = = = = = =
+= . . . . . . =
+= . . . . . . =
+= . . . P . . =
+= . . . . . . =
+= . . . . . . =
+= . . . . . . =
+= = = = = = = =
+# this is a test of a comment, comments are overwritten when saving

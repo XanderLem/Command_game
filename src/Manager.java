@@ -20,6 +20,7 @@ public class Manager {
 
         public void showRoom(){
             r.PrintRoom();
+            p.printStats();
         }
 
         public ActionResult ExecuteAction(String[] l) throws IOException {
