@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Door {
     private final String origin;
     private final Room parent;
@@ -33,6 +35,20 @@ public class Door {
 
     public Room getParent(){
         return parent;
+    }
+
+    public void save() throws IOException {
+        parent.clearCell(parent.getPlayer().getPos());
+        parent.save();
+    }
+
+    public Coordinates pChange(){
+        Coordinates p = parent.getPlayer().getPos();
+        return new Coordinates(pos.row()-p.row(),pos.column()-p.column());
+    }
+
+    public String saveName(){
+        return destination.substring(0,destination.indexOf("."))+".door";
     }
 
 

@@ -13,11 +13,13 @@ public class Room {
     private static final String TOKEN = "$";
     public Object parent;
     private player P;
+    private HashMap<String,Object> hm;
 
     public Room(String filename, Object Parent, player p) throws IOException {
         this.fileName = filename;
         this.parent = Parent;
         this.P = p;
+        this.hm = new HashMap<>();
         File f = new File(fileName);
         BufferedReader br = new BufferedReader(new FileReader(f));
         String firstLine;
@@ -71,6 +73,10 @@ public class Room {
                         if(token.contains(".txt")){
                             obj = new Room(token, this,p);
                         }
+                        else if(token.contains(".door")){
+                            obj = new Door(this,token,new Coordinates(i,j));
+                            hm.put(((Door)obj).getDest(),obj);
+                        }
                         else if(token.equals(PLAYER)){
                             P.Change_Coords(new Coordinates(i,j));
                             P.ChangeRoom(this);
@@ -106,10 +112,15 @@ public class Room {
 
     }
 
-    public boolean collided(Coordinates pos){
-        if(map[pos.row()][pos.column()].toString().equals(TOKEN)) {
+    public boolean collided(Coordinates pos) throws IOException {
+        Object o = map[pos.row()][pos.column()];
+        if(o.toString().equals(TOKEN)) {
             P.addToScore(1);
             return true;
+        }
+        else if(o instanceof Door){
+            ((Manager)parent).switchRoom(((Door)o));
+            return false;
         }
         return false;
     }
@@ -123,7 +134,7 @@ public class Room {
         map[pos.row()][pos.column()] = P;
     }
 
-    public boolean PCanMove(Coordinates pos){
+    public boolean PCanMove(Coordinates pos) throws IOException {
         Coordinates c = P.getPos().plus(pos);
         if((c.row()>=0 && c.row()<=numRows)&&(c.column()>=0 && c.column()<= numCols)){
             if(!isEmpty(c)){
@@ -135,11 +146,24 @@ public class Room {
 
     }
 
+    public void changeRoom(String origin, Coordinates change) throws IOException {
+        Object d = hm.get(origin);
+        P.ChangeRoom(this);
+        Coordinates c = ((Door)d).getPos().plus(change);
+        P.Change_Coords(c);
+        PlaceP(c);
+        save();
+    }
+
     public void MoveP(Coordinates pos){
         Coordinates c = P.getPos().plus(pos);
         clearCell(P.getPos());
         PlaceP(c);
         P.Change_Coords(c);
+    }
+
+    public player getPlayer(){
+        return P;
     }
 
     public void save() throws IOException {
@@ -148,7 +172,13 @@ public class Room {
         bw.newLine();
         for (Object[] objects : map) {
             for (Object s : objects) {
-                bw.write(s.toString() + " ");
+                if(s instanceof Door){
+                    bw.write(((Door) s).saveName() + " ");
+                }
+                else{
+                    bw.write(s.toString() + " ");
+                }
+
             }
             bw.newLine();
 

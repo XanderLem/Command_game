@@ -63,4 +63,10 @@ public class Manager {
         }
 
 
+        public void switchRoom(Door d) throws IOException {
+            Room newRoom = new Room(d.getDest(),this,p);
+            d.save();
+            newRoom.changeRoom(d.getOrigin(),d.pChange());
+            r = newRoom;
+        }
 }

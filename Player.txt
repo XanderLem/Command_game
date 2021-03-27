@@ -1,4 +1,4 @@
 room2.txt
 Xander
 10
-1
+3
