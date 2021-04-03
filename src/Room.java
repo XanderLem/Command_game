@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * the room object is basically where everything happens. its the world
+ */
 public class Room {
 
     private Object[][] map;
@@ -15,6 +18,13 @@ public class Room {
     private player P;
     private HashMap<String,Object> hm;
 
+    /**
+     * reads from the room file and makes a 2d array filled with the characters/ player/ doors
+     * @param filename the filename to read from
+     * @param Parent the parent of the room (the manager)
+     * @param p the player object
+     * @throws IOException thrown if something goes wrong
+     */
     public Room(String filename, Object Parent, player p) throws IOException {
         this.fileName = filename;
         this.parent = Parent;
@@ -23,8 +33,6 @@ public class Room {
         File f = new File(fileName);
         BufferedReader br = new BufferedReader(new FileReader(f));
         String firstLine;
-
-
             firstLine = br.readLine();
             String[] dims = firstLine.split("\\s+");
             do {
@@ -96,22 +104,47 @@ public class Room {
     }
 
 
+    /**
+     * @return the filename
+     */
     @Override
     public String toString(){
         return fileName;
     }
 
+    /**
+     * @param pos the position to get from
+     * @return whatever is at the position in the map
+     */
     public Object GetAtPos(Coordinates pos){return map[pos.row()][pos.column()];}
 
+    /**
+     * @return the parent (not used, but might be useful in the future)
+     */
     public Object GetParent(){return parent;}
 
+    /**
+     * clears the cell at the postion
+     * @param pos the position to clear the cell
+     */
     public void clearCell(Coordinates pos){map[pos.row()][pos.column()] = EMPTY;}
 
+    /**
+     * @param pos the position to check
+     * @return true if the position is empty, false otherwise
+     */
     public boolean isEmpty(Coordinates pos){
         return (map[pos.row()][pos.column()].equals(EMPTY));
 
     }
 
+    /**
+     * if the position is not empty and the player wants to go there, this method is called
+     * to find out what to do
+     * @param pos the position of the cell where the player wants to move to
+     * @return true if the player can move there, false if they cant
+     * @throws IOException if something goes wrong
+     */
     public boolean collided(Coordinates pos) throws IOException {
         Object o = map[pos.row()][pos.column()];
         if(o.toString().equals(TOKEN)) {
@@ -125,15 +158,29 @@ public class Room {
         return false;
     }
 
-
+    /**
+     * places an object at the position
+     * @param obj the object to be placed
+     * @param pos the position to place the object
+     */
     public void PlaceOBJ(Object obj,Coordinates pos){
         map[pos.row()][pos.column()] = obj;
     }
 
+    /**
+     * places the player at the position
+     * @param pos the position to place the player
+     */
     public void PlaceP(Coordinates pos){
         map[pos.row()][pos.column()] = P;
     }
 
+    /**
+     * checks if the player can move to a position, also checks if the position is in the map
+     * @param pos the distance/direction the player wants to move
+     * @return true if the player can move the desired amount/ direction
+     * @throws IOException thrown if something goes wrong
+     */
     public boolean PCanMove(Coordinates pos) throws IOException {
         Coordinates c = P.getPos().plus(pos);
         if((c.row()>=0 && c.row()<=numRows)&&(c.column()>=0 && c.column()<= numCols)){
@@ -146,6 +193,12 @@ public class Room {
 
     }
 
+    /**
+     * method to change the room/ handle stuff when the player goes through a door to this new room
+     * @param origin where the player came from
+     * @param change the change in position the player should move
+     * @throws IOException thrown if something goes wrong
+     */
     public void changeRoom(String origin, Coordinates change) throws IOException {
         Object d = hm.get(origin);
         P.ChangeRoom(this);
@@ -155,6 +208,10 @@ public class Room {
         save();
     }
 
+    /**
+     * moves the player an amount of spaces in a direction
+     * @param pos the position to add to the players position to get the destination
+     */
     public void MoveP(Coordinates pos){
         Coordinates c = P.getPos().plus(pos);
         clearCell(P.getPos());
@@ -162,10 +219,17 @@ public class Room {
         P.Change_Coords(c);
     }
 
+    /**
+     * @return the player
+     */
     public player getPlayer(){
         return P;
     }
 
+    /**
+     * goes through the map and writes it down in the room file to save the room
+     * @throws IOException thrown if something goes wrong
+     */
     public void save() throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
         bw.write(numCols + " " + numCols);
@@ -186,7 +250,10 @@ public class Room {
         bw.close();
     }
 
-        public void PrintRoom () {
+    /**
+     * prints a string representation of the room
+     */
+    public void PrintRoom () {
             System.out.print("    ");
             for (int c = 0; c < map[0].length; ++c) {
                 System.out.printf("%2d ", c);
