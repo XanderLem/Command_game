@@ -1,4 +1,4 @@
-room3.txt
-Xander
+room2.txt
+Player
 10
-6
+0

@@ -44,38 +44,26 @@ public class Manager {
             switch (l[0]) {
                 case "w" -> {
                     Coordinates c = new Coordinates( - 1,0) ;
-                    if (r.PCanMove(c)) {
-                        r.MoveP(c);
-                    }
+                    if (r.PCanMove(c)) {r.MoveP(c);}
                     return ActionResult.OK;
                 }
                 case "s" -> {
                     Coordinates c = new Coordinates(1,0);
-                    if (r.PCanMove(c)) {
-                        r.MoveP(c);
-                    }
+                    if (r.PCanMove(c)) {r.MoveP(c);}
                     return ActionResult.OK;
                 }
                 case "a" -> {
                     Coordinates c = new Coordinates(0, -1);
-                    if (r.PCanMove(c)) {
-                        r.MoveP(c);
-                    }
+                    if (r.PCanMove(c)) {r.MoveP(c);}
                     return ActionResult.OK;
                 }
                 case "d" -> {
                     Coordinates c = new Coordinates(0, 1);
-                    if (r.PCanMove(c)) {
-                        r.MoveP(c);
-                    }
+                    if (r.PCanMove(c)) {r.MoveP(c);}
                     return ActionResult.OK;
                 }
-                case "save"->{
-                    p.save();
-                }
-                case"score"->{
-                    p.addToScore(Integer.parseInt(l[1]));
-                }
+                case "save"->{p.save();}
+                case "score"->{p.addToScore(Integer.parseInt(l[1]));}
             }
             return ActionResult.OK;
         }

@@ -245,7 +245,6 @@ public class Room {
 
             }
             bw.newLine();
-
         }
         bw.close();
     }
@@ -253,7 +252,7 @@ public class Room {
     /**
      * prints a string representation of the room
      */
-    public void PrintRoom () {
+    public void PrintRoom(){
             System.out.print("    ");
             for (int c = 0; c < map[0].length; ++c) {
                 System.out.printf("%2d ", c);
@@ -261,9 +260,7 @@ public class Room {
             System.out.println();
             for (int i = 0; i < map.length; i++) {
                 System.out.printf("%2d  ", i);
-                for (Object s : map[i]) {
-                    System.out.print(" " + s.toString() + " ");
-                }
+                for (Object s : map[i]) {System.out.print(" " + s.toString() + " ");}
                 System.out.println();
             }
         }
