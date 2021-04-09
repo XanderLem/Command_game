@@ -1,4 +1,4 @@
-room2.txt
+room3.txt
 Player
 10
-0
+1
