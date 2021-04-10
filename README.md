@@ -19,7 +19,7 @@
 * The score is the players score which can be updated now 
 * The ">" is the cursor prompt for inputting commands
 # Inputting Commands
-## currently there are 7 commands, 4 of which are for movement
+## currently there are 7 commands, 4 of which are for movement, please note that the game only accepts one command at a time
 * "w" for moving the player up
 * "s" for moving the player down
 * "a" for moving the player left
@@ -38,3 +38,38 @@
 ![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_4.PNG)
 ## and the result
 ![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_5.PNG)
+# What is the "$"?
+## the "$" is the symbol that is used to represent a point
+## to gain a point, simply walk to it
+![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_6.PNG)
+![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_7.PNG)
+## and you will gain a point
+# Extra info/ behind the game
+## typing the save command and then quitting after the command was entered will save the game
+## the game saves rooms and the player state in text files
+## here is what the saved state of the first room that the player started in looks like
+![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_9.PNG)
+## the first line, is the dimensions of the room (row,col)
+## lines 2-5 are simple, they are representing part of the room with walls and empty tiles
+## please note that each symbol needs to be separated by a space on either side 
+## line 6 is the same as lines 2-5 but with one major difference: it has a door
+# How do doors work and how to make them?
+## doors are made by typing the destination room filename followed by ".door", the first letter of the name would be in the place where a "." or a "=" would go
+## in this example, the desination room is room3 and its file name is room3.txt, so the door for room3 is "room3.door"
+## please not that a door MUST have a coresponding door in the other room, as seen in room3's text file
+![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_8.PNG)
+* the "$" is the point symbol and the "P" is the player symbol
+## to quickly go over how doors work, and this is an oversimplification:
+* when the player moves to a tile with a door in it the door finds the destination room
+* and then corresponding door that has the oragin room name ("room3.door" looks in room3, for a door with "room2.text" as its destination)
+* and then tells that room to change the players rooms and move the player to a tile next to that door
+* ( in reality, the door tells the manager object to change the rooms, and the manager does the rest) 
+## How the player info is saved
+![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_10.PNG)
+* The first line is the name of the file of the room where the player was, when the game was saved
+* The next line is the name of the player
+* The third line is the player's health
+* The last line in the player's score
+## Misc
+* rooms can be any size and shape, as long as the dimensions match the numbers on the first line
+* will add any other info when I think of some
