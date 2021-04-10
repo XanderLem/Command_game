@@ -40,10 +40,9 @@
 ![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_5.PNG)
 # What is the "$"?
 ## the "$" is the symbol that is used to represent a point
-## to gain a point, simply walk to it
+## to gain a point, simply walk to it and you will gain a point
 ![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_6.PNG)
 ![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/Command_game_read_7.PNG)
-## and you will gain a point
 # Extra info/ behind the game
 ## typing the save command and then quitting after the command was entered will save the game
 ## the game saves rooms and the player state in text files
