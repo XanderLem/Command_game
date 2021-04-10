@@ -1,5 +1,5 @@
 # Command_game
-# a small little dungeon game that can be played the in command line output (so far, only tested in intelij running the main config)
+# a small little dungeon game that can be played in the command line output (so far, only tested in intelij running the main config)
 ## please note that this is a small project to meet the requirements of a major project for CSH and is
 ## not intended to ever be fully finished, released, or even played by the general public
 
