@@ -1,4 +1,4 @@
-room3.txt
+doom1.txt
 Player
 10
-1
+0

@@ -9,6 +9,9 @@ import java.util.List;
 
 /**
  * Class for the player, in charger of keeping info, reading and wrting info, changing rooms etc
+ *
+ * note to self: take a look at object input/output streams for storing data ( possibly can save an object in a file and read it)
+ * https://stackoverflow.com/questions/10654236/java-save-object-data-to-a-file
  */
 public class player {
     protected Coordinates pos;
@@ -97,8 +100,9 @@ public class player {
     /**
      * @return the player token
      */
+    @Override
     public String toString(){
-        return Player_token;
+        return ConsoleColors.BLUE+Player_token+ConsoleColors.RESET;
     }
 
     /**
@@ -128,6 +132,10 @@ public class player {
         System.out.println("Name: "+ name);
         System.out.println("Health: "+ health);
         System.out.println("Score: "+ score);
+    }
+
+    public String saveName(){
+        return Player_token;
     }
 
 

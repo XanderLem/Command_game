@@ -18,6 +18,18 @@ public class Room {
     private player P;
     private HashMap<String,Object> hm;
 
+
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     /**
      * reads from the room file and makes a 2d array filled with the characters/ player/ doors
      * @param filename the filename to read from
@@ -236,13 +248,13 @@ public class Room {
         bw.newLine();
         for (Object[] objects : map) {
             for (Object s : objects) {
-                if(s instanceof Door){
-                    bw.write(((Door) s).saveName() + " ");
+                if(s instanceof Door){bw.write(((Door) s).saveName() + " ");}
+                else if(s instanceof  player){
+                    System.out.println("found the player");
+                    bw.write(((player) s).saveName() + " ");
                 }
-                else{
-                    bw.write(s.toString() + " ");
-                }
-
+                else
+                {bw.write(s.toString() + " ");}
             }
             bw.newLine();
         }
@@ -254,13 +266,19 @@ public class Room {
      */
     public void PrintRoom(){
             System.out.print("    ");
-            for (int c = 0; c < map[0].length; ++c) {
-                System.out.printf("%2d ", c);
-            }
+            for (int c = 0; c < map[0].length; ++c) {System.out.printf("%2d ", c);}
             System.out.println();
             for (int i = 0; i < map.length; i++) {
                 System.out.printf("%2d  ", i);
-                for (Object s : map[i]) {System.out.print(" " + s.toString() + " ");}
+                for (Object s : map[i]) {
+                    if(s.equals("$")){
+                        System.out.print(" "+ConsoleColors.GREEN+s+ConsoleColors.RESET+" ");
+                    }
+                    else if(s.equals("=")){
+                        System.out.print(" "+ConsoleColors.RED+s+ConsoleColors.RESET+" ");
+                    }
+                    else{System.out.print(" " + s + " ");}
+                }
                 System.out.println();
             }
         }

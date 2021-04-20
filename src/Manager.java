@@ -22,14 +22,12 @@ public class Manager {
         {
             this.p = new player(this);
             this.r = new Room(p.GetRoomName(), this, p);
-
         }
 
     /**
      * prints the room and then the stats
      */
-    public void showRoom()
-    {
+    public void showRoom(){
             r.PrintRoom();
             p.printStats();
     }
@@ -67,7 +65,6 @@ public class Manager {
             }
             return ActionResult.OK;
         }
-
 
     /**
      * method to change what room the player is in, when the player moves into a space occupied by a door
