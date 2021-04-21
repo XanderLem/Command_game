@@ -6,6 +6,8 @@
 ###Update 4/20/21:
 ####Noticed that only having two square rooms with nothing in them was boring. I am not good with level design, so I started to implement the origional Doom's E1M1 Hanger level
 also started to experiment with color-coding the characters to make the visuals easier to understand
+here is what a sample of what the current game looks like
+![alt text](https://github.com/XanderLem/Command_game/blob/master/Images/CMD_game_color.PNG)
 
 # Running the "game"
 ## to start, run the main run configuration, your output should look similar to this
